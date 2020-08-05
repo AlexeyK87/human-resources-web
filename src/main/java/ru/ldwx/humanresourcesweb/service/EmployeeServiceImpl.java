@@ -5,17 +5,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import ru.ldwx.humanresourcesweb.model.Department;
 import ru.ldwx.humanresourcesweb.model.Employee;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService {
 
     private final RestTemplate template;
 
@@ -61,10 +59,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public List<Employee> getBetweenDates(LocalDate startDate, LocalDate endDate) {
-        Map<String, String> params = new HashMap<>();
-        params.put("startDate", startDate == null ? null : startDate.toString());
-        params.put("endDate", endDate == null ? null : endDate.toString());
-        Employee[] employees = template.getForObject(REST_URL, Employee[].class, params);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(REST_URL + "/filter")
+                .queryParam("startDate", startDate)
+                .queryParam("endDate", endDate);
+        Employee[] employees = template.getForObject(builder.toUriString(), Employee[].class);
         return employees == null ? List.of() : Arrays.asList(employees);
     }
 }

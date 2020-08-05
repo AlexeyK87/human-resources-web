@@ -13,7 +13,7 @@ import ru.ldwx.humanresourcesweb.service.DepartmentService;
 import ru.ldwx.humanresourcesweb.service.EmployeeService;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +38,19 @@ public class EmployeeController {
 
     @RequestMapping("/employees")
     public String getAllUsers(Model model) {
+        LocalDate startDate = LocalDate.MIN;
+        LocalDate endDate = LocalDate.MAX;
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
         model.addAttribute("employees", service.getAll());
+        return "employeeList";
+    }
+
+    @RequestMapping("/employees/filter")
+    public String getBetween(Model model, String startDate, String endDate) {
+        LocalDate start = startDate == null ? LocalDate.MIN : LocalDate.parse(startDate);
+        LocalDate end = endDate == null ? LocalDate.MAX : LocalDate.parse(endDate);
+        model.addAttribute("employees", service.getBetweenDates(start, end ));
         return "employeeList";
     }
 
