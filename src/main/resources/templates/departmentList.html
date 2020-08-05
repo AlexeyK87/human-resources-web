@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Департаменты</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Название департамента</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tr th:each="department : ${departments}">
+        <td th:text="${department.name}"></td>
+        <td><a th:href="@{/departments/delete(id=${department.id})}" class="btn btn-danger">Удалить</a></td>
+    </tr>
+</table>
+<br>
+<a href="/departments/add">Добавить департамент</a>
+<br>
+<a href="/">На главную</a>
+</body>
+</html>

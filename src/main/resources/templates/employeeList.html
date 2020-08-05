@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All users</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Full Name</th>
+        <th>Birthday</th>
+        <th>Salary</th>
+        <th>Department</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.fullName}"></td>
+        <td th:text="${employee.dateOfBirth}"></td>
+        <td th:text="${employee.salary}"></td>
+        <td th:text="${employee.department}"></td>
+        <td></td>
+        <td><a th:href="@{/employees/delete(id=${employee.id})}" class="btn btn-danger">Удалить</a></td>
+    </tr>
+</table>
+<br>
+<a href="/employees/add">Добавить сотрудника</a>
+<br>
+<a href="/">На главную</a>
+</body>
+</html>

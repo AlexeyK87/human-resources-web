@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование сотрудника</title>
+</head>
+<body>
+<form th:action="@{/employees/add}" th:object="${employee}" method="post">
+    <input type="hidden" name="id" id="id" th:value="${employee.id}"/>
+    <input type="text" name="fullName" id="fullName" th:value="${employee.fullName}"/>
+    <input type="date" name="dateOfBirth" id="dateOfBirth" th:value="${employee.dateOfBirth}"/>
+    <input type="number" name="salary" id="salary" th:value="${employee.salary}"/>
+    <select th:field="${employee.department}">
+        <option th:each="department : ${departments}"
+                th:value="${department}"
+                th:text="${department.name}"></option>
+    </select>
+    <input type="submit" id="submitButton" th:value="Save">
+    <input type="reset" id="resetButton" name="reset" th:value="Reset"/>
+</form>
+<br>
+<a href="/">На главную</a>
+</body>
+</html>

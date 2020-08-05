@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчет по департаментам</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Департамент</th>
+        <th>Средняя зарплата</th>
+    </tr>
+    </thead>
+    <tr th:each="salary : ${averageSalary}">
+        <td th:text="${salary.key}"></td>
+        <td th:text="${salary.value}"></td>
+    </tr>
+</table>
+<br>
+<a href="/">На главную</a>
+</body>
+</html>
