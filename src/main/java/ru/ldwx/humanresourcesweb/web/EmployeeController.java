@@ -80,14 +80,20 @@ public class EmployeeController {
     public String getReport(Model model) {
         Map<String, BigDecimal> departmentAverageSalary = new HashMap<>();
         List<Employee> employees = service.getAll();
-        Map<String, List<Employee>> collect = employees.stream().collect(Collectors.groupingBy(e -> e.getDepartment().getName()));
-        for (Map.Entry<String, List<Employee>> entry : collect.entrySet()) {
-            BigDecimal sum = new BigDecimal(0);
-            for (Employee e : entry.getValue()) {
-                sum = sum.add(e.getSalary());
+        List<Department> departments = departmentService.getAll();
+        Map<String, List<Employee>> employeesByDepartments = employees.stream().collect(Collectors.groupingBy(e -> e.getDepartment().getName()));
+        for (Department department : departments) {
+            String departmentName = department.getName();
+            BigDecimal average = new BigDecimal(0);
+            if (employeesByDepartments.containsKey(departmentName)) {
+                List<Employee> employeeInDepartment = employeesByDepartments.get(departmentName);
+                BigDecimal sum = new BigDecimal(0);
+                for (Employee e : employeeInDepartment) {
+                    sum = sum.add(e.getSalary());
+                }
+                average = sum.divide(new BigDecimal(employeeInDepartment.size()));
             }
-            BigDecimal average = sum.divide(new BigDecimal(entry.getValue().size()));
-            departmentAverageSalary.put(entry.getKey(), average);
+            departmentAverageSalary.put(departmentName, average);
         }
         model.addAttribute("averageSalary", departmentAverageSalary);
         return "departmentReport";
