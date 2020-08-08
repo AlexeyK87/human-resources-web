@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form method="post" action="employees/filter">
+<form method="post" action="./filter">
     <dl>
         <dt>Начальная дата</dt>
         <dd><input type="date" name="startDate" th:value="${startDate}"></dd>
@@ -18,7 +18,6 @@
     </dl>
     <button type="submit">Отфильтровать</button>
 </form>
-
 
 <table border="1">
     <thead>
@@ -37,12 +36,12 @@
         <td th:text="${employee.salary}"></td>
         <td th:text="${employee.department}"></td>
         <td></td>
-        <td><a th:href="@{/employees/delete(id=${employee.id})}" class="btn btn-danger">Удалить</a></td>
+        <td><a th:href="@{./employees/delete(id=${employee.id})}" class="btn btn-danger">Удалить</a></td>
     </tr>
 </table>
 <br>
-<a href="/employees/add">Добавить сотрудника</a>
+<a href="./employees/add">Добавить сотрудника</a>
 <br>
-<a href="/">На главную</a>
+<a href="./">На главную</a>
 </body>
 </html>

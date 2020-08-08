@@ -14,11 +14,11 @@
     </thead>
     <tr th:each="department : ${departments}">
         <td th:text="${department.name}"></td>
-        <td><a th:href="@{/departments/delete(id=${department.id})}" class="btn btn-danger">Удалить</a></td>
+        <td><a th:href="@{./departments/delete(id=${department.id})}" class="btn btn-danger">Удалить</a></td>
     </tr>
 </table>
 <br>
-<a href="/departments/add">Добавить департамент</a>
+<a href="./departments/add">Добавить департамент</a>
 <br>
 <a href="/">На главную</a>
 </body>
