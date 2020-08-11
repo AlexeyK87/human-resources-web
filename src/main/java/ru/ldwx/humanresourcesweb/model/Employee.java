@@ -26,6 +26,14 @@ public class Employee {
         this.department = department;
     }
 
+    public Employee(Integer id, String fullName, LocalDate dateOfBirth, BigDecimal salary, Department department) {
+        this.id = id;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.salary = salary;
+        this.department = department;
+    }
+
     public Integer getId() {
         return id;
     }

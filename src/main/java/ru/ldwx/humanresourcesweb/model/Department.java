@@ -17,6 +17,11 @@ public class Department {
         return id;
     }
 
+    public Department(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
