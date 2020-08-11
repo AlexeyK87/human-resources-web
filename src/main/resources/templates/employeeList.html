@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>All users</title>
 </head>
 <body>
 
-<form method="post" action="./filter">
+<form method="post" th:action="@{/employees/filter}">
     <dl>
         <dt>Начальная дата</dt>
         <dd><input type="date" name="startDate" th:value="${startDate}"></dd>
@@ -40,8 +39,8 @@
     </tr>
 </table>
 <br>
-<a href="/employees/add">Добавить сотрудника</a>
+<a th:href="@{/employees/add}">Добавить сотрудника</a>
 <br>
-<a href="./">На главную</a>
+<a th:href="@{/}">На главную</a>
 </body>
 </html>

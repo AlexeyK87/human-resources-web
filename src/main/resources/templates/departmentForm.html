@@ -5,13 +5,13 @@
     <title>Добавление департамента</title>
 </head>
 <body>
-<form action="#" th:action="@{./departments/add}" th:object="${department}" method="post">
+<form action="#" th:action="@{/departments/add}" th:object="${department}" method="post">
     <input type="hidden" name="id" id="id" th:value="${department.id}" />
     <input type="text" name="name" id="name" th:value="${department.name}"/>
     <button type="submit" name="submit" value="value" class="link-button">Сохранить</button>
 </form>
 
 <br>
-<a href="/">На главную</a>
+<a th:href="@{/}">На главную</a>
 </body>
 </html>

@@ -38,8 +38,8 @@ public class EmployeeController {
 
     @RequestMapping(value = "/employees", produces = "text/plain;charset=UTF-8")
     public String getAllUsers(Model model) {
-        LocalDate startDate = LocalDate.MIN;
-        LocalDate endDate = LocalDate.MAX;
+        LocalDate startDate = LocalDate.of(1900, 1, 1);
+        LocalDate endDate = LocalDate.now();
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("employees", service.getAll());

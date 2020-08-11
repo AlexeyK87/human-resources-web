@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Главная</title>
 </head>
 <body>
 
-<a href="./employees">Все сотрудники</a>
+<a th:href="@{/employees}">Все сотрудники</a>
 <br>
-<a href="./report">Отчет по департаментам</a>
+<a th:href="@{/report}">Отчет по департаментам</a>
 <br>
-<a href="./departments">Редактирование департаментов</a>
+<a th:href="@{/departments}">Редактирование департаментов</a>
 
 </body>
 </html>

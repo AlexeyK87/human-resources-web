@@ -5,7 +5,7 @@
     <title>Редактирование сотрудника</title>
 </head>
 <body>
-<form th:action="@{./add}" th:object="${employee}" method="post">
+<form th:action="@{/employees/add}" th:object="${employee}" method="post">
     <input type="hidden" name="id" id="id" th:value="${employee.id}"/>
     <input type="text" name="fullName" id="fullName" th:value="${employee.fullName}"/>
     <input type="date" name="dateOfBirth" id="dateOfBirth" th:value="${employee.dateOfBirth}"/>
@@ -19,6 +19,6 @@
     <input type="reset" id="resetButton" name="reset" th:value="Reset"/>
 </form>
 <br>
-<a href="/">На главную</a>
+<a th:href="@{/}">На главную</a>
 </body>
 </html>
