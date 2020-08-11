@@ -31,12 +31,12 @@ public class EmployeeController {
         this.departmentService = departmentService;
     }
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", produces = "text/plain;charset=UTF-8")
     public String getIndex() {
         return "index";
     }
 
-    @RequestMapping("/employees")
+    @RequestMapping(value = "/employees", produces = "text/plain;charset=UTF-8")
     public String getAllUsers(Model model) {
         LocalDate startDate = LocalDate.MIN;
         LocalDate endDate = LocalDate.MAX;
@@ -46,15 +46,15 @@ public class EmployeeController {
         return "employeeList";
     }
 
-    @RequestMapping("/employees/filter")
+    @RequestMapping(value = "/employees/filter", produces = "text/plain;charset=UTF-8")
     public String getBetween(Model model, String startDate, String endDate) {
-        LocalDate start = startDate == null ? LocalDate.MIN : LocalDate.parse(startDate);
-        LocalDate end = endDate == null ? LocalDate.MAX : LocalDate.parse(endDate);
-        model.addAttribute("employees", service.getBetweenDates(start, end ));
+        LocalDate start = startDate == null || startDate.length() == 0 ? LocalDate.of(1900, 1, 1) : LocalDate.parse(startDate);
+        LocalDate end = endDate == null || endDate.length() == 0 ? LocalDate.now() : LocalDate.parse(endDate);
+        model.addAttribute("employees", service.getBetweenDates(start, end));
         return "employeeList";
     }
 
-    @RequestMapping(value = "/employees/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/employees/delete", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
     public String delete(@RequestParam(name = "id") Integer id) {
         service.delete(id);
         return "redirect:/employees";
@@ -68,7 +68,7 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
-    @RequestMapping("/employees/add")
+    @RequestMapping(value = "/employees/add", produces = "text/plain;charset=UTF-8")
     public String getEmployeeForm(Model model) {
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
@@ -76,7 +76,15 @@ public class EmployeeController {
         return "employeeForm";
     }
 
-    @RequestMapping("/report")
+    @RequestMapping(value = "/employees/update")
+    public String getEmployeeUpdateForm(@RequestParam(name = "id") String id, Model model) {
+        Employee employee = service.get(Integer.parseInt(id));
+        model.addAttribute("employee", employee);
+        model.addAttribute("departments", departmentService.getAll());
+        return "employeeForm";
+    }
+
+    @RequestMapping(value = "/report", produces = "text/plain;charset=UTF-8")
     public String getReport(Model model) {
         Map<String, BigDecimal> departmentAverageSalary = new HashMap<>();
         List<Employee> employees = service.getAll();

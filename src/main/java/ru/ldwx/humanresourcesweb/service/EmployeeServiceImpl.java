@@ -39,9 +39,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee get(int id) {
         UriComponentsBuilder componentsBuilder = UriComponentsBuilder
-                .fromUriString(REST_URL)
-                .queryParam("id", id);
-        return template.getForObject(componentsBuilder.toUriString(), Employee.class);
+                .fromUriString(REST_URL);
+        return template.getForObject(componentsBuilder.toUriString() + "/" + id, Employee.class);
     }
 
     @Override

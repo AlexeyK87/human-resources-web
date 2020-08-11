@@ -35,12 +35,12 @@
         <td th:text="${employee.dateOfBirth}"></td>
         <td th:text="${employee.salary}"></td>
         <td th:text="${employee.department}"></td>
-        <td></td>
-        <td><a th:href="@{./employees/delete(id=${employee.id})}" class="btn btn-danger">Удалить</a></td>
+        <td><a th:href="@{employees/update(id=${employee.id})}" class="btn btn-danger">Редактировать</a></td>
+        <td><a th:href="@{employees/delete(id=${employee.id})}" class="btn btn-danger">Удалить</a></td>
     </tr>
 </table>
 <br>
-<a href="./employees/add">Добавить сотрудника</a>
+<a href="/employees/add">Добавить сотрудника</a>
 <br>
 <a href="./">На главную</a>
 </body>
